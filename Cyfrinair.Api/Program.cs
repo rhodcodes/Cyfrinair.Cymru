@@ -2,6 +2,8 @@
 using System.Security.Cryptography;
 using System.Text;
 
+using Cyfrinair.Api;
+
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,30 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/password/{length}", (int length = 5, [FromQuery(Name = "sc")] bool includeSpecialChars = false) =>
-{
-    var characterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    var specialChars = "!@#$%^&*()_+[]{}|;:,.<>?";
-    var result = new StringBuilder(length);
-    var bytes = new byte[length];
-    
-    if (includeSpecialChars)
-    {
-        characterSet += specialChars;
-    }
-    
-    using (var rng = RandomNumberGenerator.Create())
-    {
-        rng.GetBytes(bytes);
-    }
-
-    for (int i = 0; i < length; i++)
-    {
-        int index = bytes[i] % characterSet.Length;
-        result.Append(characterSet[index]);
-    }
-    return result.ToString();
-}).WithName("GetPassword");
+Passwords.Map(app);
 
 app.MapGet("/guid", () => Guid.NewGuid().ToString("D")).WithName("GetGuid");
 
