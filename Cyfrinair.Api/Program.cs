@@ -24,6 +24,17 @@ app.UseHttpsRedirection();
 
 Passwords.Map(app);
 
+
+
+app.MapGet("/passphrase", () =>
+    {
+        var options = new PassphraseOptions();
+        var result = Passphrase.Generate(options);
+        app.Logger.LogInformation(result);
+        return result;
+    })
+    .WithName("GetPassphrase");
+
 app.MapGet("/guid", () => Guid.NewGuid().ToString("D")).WithName("GetGuid");
 
 app.Run();
