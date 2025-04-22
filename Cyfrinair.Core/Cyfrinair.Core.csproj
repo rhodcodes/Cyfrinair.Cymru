@@ -6,4 +6,11 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\WordListGenerator\WordListGenerator.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"/>
+        <AdditionalFiles Include="..\WordListGenerator\cy_GB.dic" />
+    </ItemGroup>
+
 </Project>
