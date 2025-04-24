@@ -8,9 +8,7 @@ public class Passphrase(PassphraseOptions options)
 {
     private readonly PassphraseOptions _options = options ?? throw new ArgumentNullException(nameof(options));
 
-    private readonly ImmutableArray<string> _wordList = ImmutableArray.Create("cariad", "dŵr", "hedyn", "tân", "iach", "glan",
-        "bywyd", "llawenydd", "canol", "modd", "hwyl", "pethau", "ynys", "deffro", "mwyn", "dawn", "plentyn", "athro",
-        "canu", "cyfrinach", "egwyl", "gwaith", "hoff", "llachar");
+    private readonly ImmutableArray<string> _wordList = WordList.Words;
     
     private readonly TextInfo _textInfo = new CultureInfo("cy-GB").TextInfo;
 
@@ -35,9 +33,7 @@ public class Passphrase(PassphraseOptions options)
             candidates[i] = _wordList[r];
         }
 
-        if (_options.Casing ==
-            // Word Casing
-            CasingOption.Upper)
+        if (_options.Casing == CasingOption.Upper)
         {
             for (int i = 0; i < candidates.Length; i++)
             {
