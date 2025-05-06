@@ -1,3 +1,5 @@
+using Cyfrinair.Core;
+
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
@@ -5,20 +7,40 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cyfrinair.Functions
 {
-    public class CyfrinairAPI
+    public class CyfrinairApi(ILogger<CyfrinairApi> logger)
     {
-        private readonly ILogger<CyfrinairAPI> _logger;
+        private readonly ILogger<CyfrinairApi> _logger = logger;
 
-        public CyfrinairAPI(ILogger<CyfrinairAPI> logger)
+        [Function("Cyfrinair")]
+        public static IActionResult Password(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "password/{count:int}")] HttpRequest req,
+            int count)
         {
-            _logger = logger;
+            // TODO: Add validation for count
+            // TODO: Add query parameters for length, includeDigits, includeSymbols, includeAmbiguousChars and validation.
+            var options = new PasswordOptions()
+            {
+                IncludeDigits = true,
+                IncludeSymbols = false,
+                IncludeAmbiguousChars = false
+            };
+            
+            var password = new Password(options);
+            var result = password.Generate((ushort)count);
+            return new OkObjectResult(result);
         }
 
-        [Function("CyfrinairAPI")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        [Function("BrawddegCudd")]
+        public static IActionResult Passphrase(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "passphrase/{count:int}")] HttpRequest req,
+            int count)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult("Welcome to Azure Functions!");
+            // TODO: Add validation for count
+            // TODO: Add query parameters for words, separator, digit and casing and validation.
+            var options = new PassphraseOptions();
+            var passphrase = new Passphrase(options);
+            var result = passphrase.Generate((ushort)count);
+            return new OkObjectResult(result);
         }
     }
 }

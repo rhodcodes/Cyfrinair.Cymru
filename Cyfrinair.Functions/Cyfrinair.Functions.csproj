@@ -3,6 +3,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <AzureFunctionsVersion>V4</AzureFunctionsVersion>
         <OutputType>Exe</OutputType>
+        <UseDotNetNativeAot>true</UseDotNetNativeAot>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -27,5 +28,8 @@
     </ItemGroup>
     <ItemGroup>
         <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Cyfrinair.Core\Cyfrinair.Core.csproj" />
     </ItemGroup>
 </Project>
