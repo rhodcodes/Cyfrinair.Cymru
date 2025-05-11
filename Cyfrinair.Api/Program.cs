@@ -25,8 +25,13 @@ app.MapGet("/password/{qty:int?}", (
     [FromQuery(Name="symbols")] bool includeSymbols = false,
     [FromQuery(Name = "ambiguous")] bool includeAmbiguousChars = false) =>
 {
-    var passwordOptions = new PasswordOptions(length, includeDigits, includeSymbols, includeAmbiguousChars);
-    var password = new Password(passwordOptions);
+    var options = new PasswordOptions() {
+        Length = length,
+        IncludeDigits = includeDigits,
+        IncludeSymbols = includeSymbols,
+        IncludeAmbiguousChars = includeAmbiguousChars
+    };
+    var password = new Password(options);
     return Results.Ok(password.Generate((ushort)qty));
 }).WithName("GetPassword");
 
