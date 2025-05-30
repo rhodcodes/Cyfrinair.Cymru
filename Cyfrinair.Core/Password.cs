@@ -6,12 +6,12 @@ namespace Cyfrinair.Core;
 public class Password(PasswordOptions options)
 {
     private readonly PasswordOptions _options = options ?? throw new ArgumentNullException(nameof(options));
-    private const string BaseCharacterSet = "abcdefghjkmnpqrtuvwxyzACDEFGHIJKMNPQRTUVWXYZ";
-    private const string DigitSet = "2345679";
-    private const string SymbolSet = "!@#$%^&*()+[]{}<>?";
-    private const string AmbiguousChars = "ilLoOSsB";
-    private const string AmbiguousSymbols = "-_.,|";
-    private const string AmbiguousDigits = "0158";
+    public const string BaseCharacterSet = "abcdefghjkmnpqrtuvwxyzACDEFGHIJKMNPQRTUVWXYZ";
+    public const string DigitSet = "234679";
+    public const string SymbolSet = "!@#$%^&*()+[]{}<>?";
+    public const string AmbiguousChars = "ilLoOSsB";
+    public const string AmbiguousSymbols = "-_.,|";
+    public const string AmbiguousDigits = "0158";
 
     public List<string> Generate(ushort quantity)
     {
