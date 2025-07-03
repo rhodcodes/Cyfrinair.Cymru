@@ -10,7 +10,7 @@
         <ProjectReference Include="..\WordListGenerator\WordListGenerator.csproj"
                           OutputItemType="Analyzer"
                           ReferenceOutputAssembly="false"/>
-        <AdditionalFiles Include="..\WordListGenerator\cy_GB.dic" />
+        <AdditionalFiles Include="..\WordListGenerator\Geiriadur.txt"/>
     </ItemGroup>
 
 </Project>
