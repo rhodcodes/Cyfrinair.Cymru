@@ -1,13 +1,15 @@
-using Microsoft.Azure.Functions.Worker.Builder;
+using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Extensions.Hosting;
 
-var builder = FunctionsApplication.CreateBuilder(args);
-
-builder.ConfigureFunctionsWebApplication();
-
-// Application Insights isn't enabled by default. See https://aka.ms/AAt8mw4.
-// builder.Services
-//     .AddApplicationInsightsTelemetryWorkerService()
-//     .ConfigureFunctionsApplicationInsights();
-
-builder.Build().Run();
+var host = new HostBuilder()
+    .ConfigureServices((context, services) =>
+    {
+        // Add any additional services here if needed
+    })
+    .ConfigureFunctionsWebApplication(app =>
+    {
+        // Configure the application here if needed
+    })
+    .ConfigureOpenApi()
+    .Build();
+host.Run();
