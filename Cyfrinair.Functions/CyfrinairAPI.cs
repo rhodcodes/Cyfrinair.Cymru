@@ -3,7 +3,9 @@ using Cyfrinair.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace Cyfrinair.Functions;
 
@@ -45,7 +47,13 @@ public class CyfrinairApi(ILogger<CyfrinairApi> logger)
         List<string> result = password.Generate((ushort)count);
         return new OkObjectResult(result);
     }
-
+    
+    [OpenApiOperation(operationId:"BrawddegCudd", tags: ["Passphrase"])]
+    [OpenApiParameter(name: "count", In = ParameterLocation.Path, Required = false, Type = typeof(int), Description = "The number of passphrases to generate. Defaults to 1.")]
+    [OpenApiParameter(name: "words", In = ParameterLocation.Query, Required = false, Type = typeof(int), Description = "The number of words in each passphrase. Defaults to 4.")]
+    [OpenApiParameter(name: "separator", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The character used to separate words in the passphrase. Defaults to '-'.")]
+    [OpenApiParameter(name: "casing", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The casing of the passphrase. Options are 'upper', 'lower', or 'random'. Defaults to 'upper'.")]
+    [OpenApiParameter(name: "digit", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The placement of digits in the passphrase. Options are 'once', 'none', or 'everyword'. Defaults to 'once'.")]
     [Function("BrawddegCudd")]
     public static IActionResult Passphrase(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "passphrase/{count:int?}")]
