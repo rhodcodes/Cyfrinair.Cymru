@@ -1,17 +1,29 @@
 {
-    "version": "2.0",
-    "logging": {
-        "applicationInsights": {
-            "samplingSettings": {
-                "isEnabled": true,
-                "excludedTypes": "Request"
-            },
-            "enableLiveMetricsFilters": true
-        }
-    },
+  "version": "2.0",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      },
+      "enableLiveMetricsFilters": true
+    }
+  },
   "extensions": {
     "http": {
-      "routePrefix": ""
+      "routePrefix": "",
+      "customHeaders": {
+        "Cache-Control": "no-store",
+        "Content-Security-Policy": "frame-ancestors 'none';",
+        "Content-Type": "application/json",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "hsts": {
+          "maxAge": 31536000,
+          "includeSubDomains": true,
+          "preload": true
+        }
+      }
     }
   }
 }

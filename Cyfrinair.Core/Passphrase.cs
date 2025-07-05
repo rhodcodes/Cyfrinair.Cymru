@@ -8,28 +8,39 @@ public class Passphrase(PassphraseOptions options)
 {
     private readonly PassphraseOptions _options = options ?? throw new ArgumentNullException(nameof(options));
 
-    private readonly ImmutableArray<string> _wordList = WordList.Words;
-    
     private readonly TextInfo _textInfo = new CultureInfo("cy-GB").TextInfo;
+
+    private readonly ImmutableArray<string> _wordList = WordList.Words;
 
     public List<string> Generate(ushort quantity)
     {
-        var results = new List<string>(quantity);
+        List<string> results = new(quantity);
 
         for (int i = 0; i < quantity; i++)
         {
             results.Add(CreatePassphrase());
         }
+
         return results;
     }
 
     private string CreatePassphrase()
     {
-        var candidates = new string[_options.Words];
-
-        for (var i = 0; i < _options.Words; i++)
+        if (_options.Words < 1)
         {
-            var r = RandomNumberGenerator.GetInt32(_wordList.Length);
+            throw new ArgumentOutOfRangeException(nameof(_options.Words), "The number of words must be at least 1.");
+        }
+
+        if (char.IsAscii(_options.Separator) == false || _options.Separator == '\0')
+        {
+            throw new ArgumentException("The separator must be an ASCII character.", nameof(_options.Separator));
+        }
+
+        string[] candidates = new string[_options.Words];
+
+        for (int i = 0; i < _options.Words; i++)
+        {
+            int r = RandomNumberGenerator.GetInt32(_wordList.Length);
             candidates[i] = _wordList[r];
         }
 
@@ -40,7 +51,7 @@ public class Passphrase(PassphraseOptions options)
                 candidates[i] = _textInfo.ToTitleCase(candidates[i]);
             }
         }
-        
+
         if (_options.Casing == CasingOption.Lower)
         {
             for (int i = 0; i < candidates.Length; i++)
@@ -48,7 +59,7 @@ public class Passphrase(PassphraseOptions options)
                 candidates[i] = _textInfo.ToLower(candidates[i]);
             }
         }
-        
+
         if (_options.Casing == CasingOption.Random)
         {
             for (int i = 0; i < candidates.Length; i++)
@@ -64,7 +75,7 @@ public class Passphrase(PassphraseOptions options)
                 }
             }
         }
-        
+
         // Add digits
 
         if (_options.DigitPlacement == DigitPlacementOption.Once)
@@ -80,10 +91,10 @@ public class Passphrase(PassphraseOptions options)
                 candidates[i] = AppendRandomNumber(candidates[i]);
             }
         }
-        
+
         // Add separator
-        var passphrase = string.Join(_options.Separator, candidates);
-        
+        string passphrase = string.Join(_options.Separator, candidates);
+
         return passphrase;
     }
 
