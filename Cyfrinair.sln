@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyfrinair.Functions", "Cyfr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyfrinair.Core.Tests", "Cyfrinair.Core.Tests\Cyfrinair.Core.Tests.csproj", "{ACC99AF0-61E2-4803-BCC6-E1C3B2F8E92F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyfrinair.BlazorUI", "Cyfrinair.BlazorUI\Cyfrinair.BlazorUI.csproj", "{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{ACC99AF0-61E2-4803-BCC6-E1C3B2F8E92F}.Release|x64.Build.0 = Release|Any CPU
 		{ACC99AF0-61E2-4803-BCC6-E1C3B2F8E92F}.Release|x86.ActiveCfg = Release|Any CPU
 		{ACC99AF0-61E2-4803-BCC6-E1C3B2F8E92F}.Release|x86.Build.0 = Release|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Debug|x64.Build.0 = Debug|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Debug|x86.Build.0 = Debug|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Release|x64.ActiveCfg = Release|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Release|x64.Build.0 = Release|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Release|x86.ActiveCfg = Release|Any CPU
+		{7A616BD3-5C8A-4D6D-A63A-A3CAACA002EE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
