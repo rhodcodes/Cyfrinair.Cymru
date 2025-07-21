@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 @* Required *@
-<MudThemeProvider />
+<MudThemeProvider Theme="CyfrinairTheme" IsDarkMode="true" />
 <MudPopoverProvider />
 
 @* Needed for dialogs *@
@@ -14,9 +14,36 @@
     <MudAppBar Elevation="1">
         <MudText Typo="Typo.h5" Class="ml-3">Cyfrinair.Cymru</MudText>
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Edge="Edge.End" Title="GitHub" Href="https://github.com/rhodcodes/Cyfrinair.Cymru" />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Edge="Edge.End"  Href="https://github.com/rhodcodes/Cyfrinair.Cymru" />
     </MudAppBar>
     <MudMainContent>
-        @*Body*@
+        @Body
     </MudMainContent>
 </MudLayout>
+
+@code {
+
+    MudTheme CyfrinairTheme = new MudTheme()
+    {
+        PaletteDark = new()
+        {
+            Background = "121212",
+            Primary = "a7e7cb",
+            TextPrimary = "a7e7cb",
+        },
+        
+        Typography = new Typography()
+        {
+            Default = new DefaultTypography()
+            {
+                FontFamily = ["Noto Sans", "Helvetica", "sans-serif"]
+            },
+            
+            H5 = new H5Typography()
+            {
+                FontFamily = ["Righteous", "Helvetica", "sans-serif"]
+            }
+        }
+    };
+
+}
