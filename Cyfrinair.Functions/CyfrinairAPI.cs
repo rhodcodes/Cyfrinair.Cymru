@@ -122,4 +122,13 @@ public class CyfrinairApi(ILogger<CyfrinairApi> logger)
         List<string> result = passphrase.Generate((ushort)count);
         return new OkObjectResult(result);
     }
+
+    [Function("RedirectToApiDocs")]
+    public IActionResult RedirectToApiDocs(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "{ignored:maxlength(0)?}")]
+        HttpRequest req,
+        string ingored = "")
+    {
+        return new RedirectResult("/swagger/ui", false);
+    }
 }
