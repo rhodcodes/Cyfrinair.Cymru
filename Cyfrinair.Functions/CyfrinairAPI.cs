@@ -24,6 +24,8 @@ public class CyfrinairApi(ILogger<CyfrinairApi> logger)
         Description = "Include symbols in the password. Defaults to true.")]
     [OpenApiParameter("ambiguous", In = ParameterLocation.Query, Required = false, Type = typeof(bool),
         Description = "Include ambiguous characters (i,l,1,o,0 etc) in the password. Defaults to true.")]
+    [OpenApiParameter("length", In = ParameterLocation.Query, Required = false, Type = typeof(int),
+        Description = "The length of the generated passwords. Defaults to 12.")]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(List<string>),
         Description = "A list of generated passwords.")]
     [Function("Password")]
@@ -49,11 +51,15 @@ public class CyfrinairApi(ILogger<CyfrinairApi> logger)
         bool includeDigits = !bool.TryParse(req.Query["numbers"], out bool parsedValue) || parsedValue;
         bool includeSymbols = !bool.TryParse(req.Query["symbols"], out parsedValue) || parsedValue;
         bool includeAmbiguousChars = !bool.TryParse(req.Query["ambiguous"], out parsedValue) || parsedValue;
+        int length = int.TryParse(req.Query["length"], out int parsedLength)
+            ? parsedLength
+            : 12;
         PasswordOptions options = new()
         {
             IncludeDigits = includeDigits,
             IncludeSymbols = includeSymbols,
-            IncludeAmbiguousChars = includeAmbiguousChars
+            IncludeAmbiguousChars = includeAmbiguousChars,
+            Length = length
         };
 
         Password password = new(options);
