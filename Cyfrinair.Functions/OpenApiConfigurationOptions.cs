@@ -3,24 +3,24 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.OpenApi.Models;
 
 namespace Cyfrinair.Functions;
+
 public class OpenApiConfigurationOptions : IOpenApiConfigurationOptions
 {
     public OpenApiInfo Info { get; set; } =
-        new OpenApiInfo
+        new()
         {
             Title = "Cyfrinair.Cymru",
             Version = "0.0.1-beta",
-            Description = "API for generating passwords and passphrases using the Welsh language. Part of the Cyfrinair.cymru project.",
-            Contact = new OpenApiContact()
+            Description =
+                "API ar gyfer creu cyfrineiriau neu brawddegau-cudd yn yr iaith Gymraeg. " +
+                "Rhan o prosiect <a href=\"https://cyfrinair.cymru\">Cyfrinair.cymru</a>.<br>" +
+                "API for generating passwords and passphrases using the Welsh language. " +
+                "Part of the <a href=\"https://cyfrinair.cymru\">Cyfrinair.cymru</a> project.",
+            Contact = new OpenApiContact
             {
-                Name = "Rhodri Lloyd-Evans",
-                Url = new Uri("https://github.com/rhodcodes/Cyfrinair.Cymru/issues/"),
+                Name = "Rhodri Lloyd-Evans", Url = new Uri("https://github.com/rhodcodes/Cyfrinair.Cymru/issues/")
             },
-            License = new OpenApiLicense()
-            {
-                Name = "MIT",
-                Url = new Uri("http://opensource.org/licenses/MIT"),
-            }
+            License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
         };
 
     public List<OpenApiServer> Servers { get; set; } = new();
